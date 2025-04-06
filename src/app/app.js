@@ -7,7 +7,6 @@ const server = http.createServer((req, res) => {
   res.end('Olá, mundo! Servidor Node.js funcionando!'); // Resposta
 });
 
-// Escolhendo a porta
 const PORT = 3000;
 
 // Iniciando o servidor
