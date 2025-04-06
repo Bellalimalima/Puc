@@ -1,9 +1,9 @@
-name: Continuous Delivery 
+name: Continuous Delivery
 on:
   push:
     branches:
       - main
-      
+
 jobs:
   delivery:
     runs-on: ubuntu-latest
