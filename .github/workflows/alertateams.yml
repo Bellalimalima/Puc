@@ -2,7 +2,7 @@ name: Alerta para o Microsoft Teams
 on:
   push:
     branches:
-      - main  # Você pode mudar para outra branch, se quiser
+      - main
 
 jobs:
   alertar:
