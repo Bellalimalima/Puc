@@ -20,13 +20,15 @@ jobs:
             "summary": "Novo Push no GitHub",
             "themeColor": "0078D7",
             "title": "🚀 Novo Push no GitHub",
-            "sections": [{
-              "activityTitle": "**${{ github.actor }}** fez um push no repositório **${{ github.repository }}**.",
-              "facts": [
-                {"name": "Branch", "value": "${{ github.ref }}"},
-                {"name": "Commit", "value": "${{ github.sha }}"}
-              ],
-              "markdown": true
-            }]
+            "sections": [
+              {
+                "activityTitle": "**${{ github.actor }}** fez um push no repositório **${{ github.repository }}**.",
+                "facts": [
+                  { "name": "Branch", "value": "${{ github.ref }}" },
+                  { "name": "Commit", "value": "${{ github.sha }}" }
+                ],
+                "markdown": true
+              }
+            ]
           }' \
           $TEAMS_WEBHOOK
