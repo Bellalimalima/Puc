@@ -1,4 +1,4 @@
-name: Lint Codebase
+name: Continuous Integration
 
 on:
   pull_request:
@@ -6,26 +6,27 @@ on:
       - main
       - develop
 
-permissions:
-  contents: read
-
 jobs:
-  lint:
+  lint-and-test:
+    name: Lint and Test
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: 18
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm install
 
-      - name: Lint with ESLint
-        run: npx eslint . --ext .js,.jsx,.ts,.tsx
+      - name: Run Linter
+        run: npm run lint
 
+      - name: Run Tests
+        run: npm test
