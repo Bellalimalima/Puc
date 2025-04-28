@@ -1,4 +1,4 @@
-name: Continuous Integration (Lint)
+name: Lint Codebase
 
 on:
   pull_request:
@@ -6,21 +6,26 @@ on:
       - main
       - develop
 
+permissions:
+  contents: read
+
 jobs:
   lint:
-    name: Run Super Linter
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Run Super Linter
-        uses: super-linter/super-linter@v7.3.0
-        env:
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint with ESLint
+        run: npx eslint . --ext .js,.jsx,.ts,.tsx
+
