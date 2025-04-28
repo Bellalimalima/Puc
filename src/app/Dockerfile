@@ -1,4 +1,8 @@
-FROM node:latest
+FROM node:18
+
+RUN useradd --create-home appuser
+
+USER appuser
 
 WORKDIR /app
 
