@@ -1,0 +1,34 @@
+name: Alerta para o Microsoft Teams
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  alertar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Enviar alerta para o Teams
+        env:
+          TEAMS_WEBHOOK: ${{ secrets.TEAMS_WEBHOOK }}
+        run: |
+          curl -H "Content-Type: application/json" \
+          -d '{
+            "@type": "MessageCard",
+            "@context": "http://schema.org/extensions",
+            "summary": "Novo Push no GitHub",
+            "themeColor": "0078D7",
+            "title": "🚀 Novo Push no GitHub",
+            "sections": [
+              {
+                "activityTitle": "**${{ github.actor }}** fez um push no repositório **${{ github.repository }}**.",
+                "facts": [
+                  { "name": "Branch", "value": "${{ github.ref }}" },
+                  { "name": "Commit", "value": "${{ github.sha }}" }
+                ],
+                "markdown": true
+              }
+            ]
+          }' \
+          $TEAMS_WEBHOOK
